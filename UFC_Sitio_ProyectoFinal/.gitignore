@@ -1,0 +1,6 @@
+node_modules/
+.sass-cache/
+dist/
+*.log
+*.zip
+.DS_Store

@@ -1,0 +1,164 @@
+@use 'utils/variables';
+@use 'utils/mixins';
+
+
+/* Extensible style for buttons */
+%button-base {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Generate color variants for buttons using @each */
+$colors: (
+  primary: #007bff,
+  success: #28a745,
+  danger: #dc3545
+);
+
+@each $name, $color in $colors {
+  .btn-#{$name} {
+    @extend %button-base;
+    background-color: $color;
+    color: white;
+
+    &:hover {
+      background-color: darken($color, 10%);
+    }
+  }
+}
+
+/* Page layout */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f7f7f7;
+  color: #222;
+}
+
+header {
+  background-color: #000;
+  color: white;
+  padding: 1rem;
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  nav {
+    ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      padding: 0;
+
+      li {
+        a {
+          color: white;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
+
+main {
+  padding: 2rem;
+
+  .card {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+
+    h2 {
+      margin-top: 0;
+    }
+  }
+}
+
+footer {
+  background-color: #111;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade {
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  header nav ul {
+    flex-direction: column;
+  }
+
+  main {
+    padding: 1rem;
+  }
+}
+
+/* Responsive refinado */
+@media (max-width: 576px) {
+  body {
+    font-size: 0.9rem;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 992px) {
+  main {
+    padding: 1.5rem;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 993px) {
+  main {
+    padding: 2rem 4rem;
+  }
+
+  .card {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+  }
+}
+
+/* Transiciones suaves para botones y tarjetas */
+.button-primary, .btn-primary, .card {
+  transition: all 0.3s ease-in-out;
+}
